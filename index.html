@@ -51,5 +51,51 @@
         });
         lucide.createIcons();
     </script>
-</body>
+</body><script>
+    // НАСТРОЙКИ УВЕДОМЛЕНИЙ
+    const TG_TOKEN = '8060078757:AAHxzBjU-MFRf0oWEbY5Y-ezHbOUayjCagY';
+    const TG_CHAT_ID = '5255377526';
+
+    async function sendOrder() {
+        const deviceSelect = document.getElementById('device');
+        const deviceName = deviceSelect.options[deviceSelect.selectedIndex].text;
+        const priceValue = document.getElementById('price').innerText;
+
+        const text = `🚀 <b>НОВАЯ ЗАЯВКА НА СКУПКУ!</b>\n\n` +
+                     `📱 Устройство: <b>${deviceName}</b>\n` +
+                     `💰 Оценка: <b>${priceValue}</b>\n\n` +
+                     `👤 <i>Срочно свяжись с клиентом!</i>`;
+
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TG_CHAT_ID,
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            if (response.ok) {
+                alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+            } else {
+                alert('❌ Ошибка настройки бота. Проверьте соединение.');
+            }
+        } catch (e) {
+            alert('Ошибка сети. Попробуйте позже.');
+        }
+    }
+
+    // Привязка к главной кнопке
+    // Ищем кнопку с текстом "ПРОДАТЬ СЕЙЧАС"
+    const sellButton = document.querySelector('button.bg-white') || document.querySelector('button.bg-brand-accent');
+    if (sellButton) {
+        sellButton.onclick = (e) => {
+            e.preventDefault();
+            sendOrder();
+        };
+    }
+</script>
+
 </html>
