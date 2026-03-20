@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cycle Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #050509; color: white; }
+        .glass { background: rgba(16, 17, 26, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .neon-text { color: #00F2FE; text-shadow: 0 0 10px rgba(0,242,254,0.5); }
+    </style>
+</head>
+<body>
+    <nav class="p-5 border-b border-white/10 flex justify-between items-center glass sticky top-0 z-50">
+        <h1 class="font-black text-xl tracking-tighter neon-text uppercase">Smart Cycle</h1>
+        <button onclick="alert('Вход для админа настроен')" class="bg-[#00F2FE] text-black px-4 py-2 rounded-full font-bold text-sm">ВХОД</button>
+    </nav>
+
+    <main class="p-4 max-w-md mx-auto">
+        <section class="mt-8 p-6 glass rounded-[2rem] border-cyan-500/30">
+            <h2 class="text-xl font-bold mb-4">Оцени устройство 📱</h2>
+            <select id="device" class="w-full bg-black border border-white/10 p-4 rounded-xl mb-3 outline-none focus:border-cyan-400 text-white">
+                <option value="80000">iPhone 15 Pro</option>
+                <option value="60000">iPhone 14 Pro</option>
+                <option value="45000">MacBook Air M1</option>
+            </select>
+            <div class="text-center mt-6">
+                <p class="text-slate-400 text-sm mb-1">Предварительная цена:</p>
+                <div id="price" class="text-4xl font-mono font-bold neon-text">80 000 ₽</div>
+            </div>
+            <button class="w-full mt-6 bg-white text-black py-4 rounded-2xl font-black hover:scale-95 transition-transform">ПРОДАТЬ СЕЙЧАС</button>
+        </section>
+
+        <h2 class="text-2xl font-black mt-12 mb-6 uppercase">В наличии</h2>
+        
+        <div class="glass rounded-[2rem] p-5 mb-4 relative overflow-hidden group">
+            <div class="aspect-square bg-black rounded-2xl mb-4 flex items-center justify-center text-5xl">📱</div>
+            <span class="absolute top-8 right-8 bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded">ИДЕАЛ</span>
+            <h3 class="font-bold text-lg">iPhone 13 Pro, 256GB</h3>
+            <p class="text-2xl font-mono font-bold mt-2">58 900 ₽</p>
+            <button class="w-full mt-4 py-3 bg-white/5 border border-white/10 rounded-xl font-bold">КУПИТЬ</button>
+        </div>
+    </main>
+
+    <script>
+        // Простая логика обновления цены
+        document.getElementById('device').addEventListener('change', (e) => {
+            document.getElementById('price').innerText = Number(e.target.value).toLocaleString() + ' ₽';
+        });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
